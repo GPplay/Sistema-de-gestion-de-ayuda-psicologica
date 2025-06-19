@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/LogoA.svg';
 
-
 function LandingPage() {
-   return (
+  return (
     <div className="min-h-screen bg-gray-100">
       {/* Contenido principal */}
       <main className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-[#f5eddd]">

@@ -14,12 +14,8 @@ function Login() {
 
   return (
     <div className="bg-[#f9f1dc] min-h-screen flex flex-col items-center justify-center px-4">
-      <h1 className="text-xl md:text-2xl font-bold text-teal-800 mb-10 text-center">
-        Sistema de Gestión del Apoyo Psicológico en la Institución educativa
-      </h1>
 
       <form
-        onSubmit={handleSubmit}
         className="bg-white rounded-t-3xl rounded-b-xl shadow-xl p-6 w-full max-w-sm"
       >
         <h2 className="text-center text-lg font-bold mb-4">Iniciar sesión</h2>
