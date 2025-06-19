@@ -34,12 +34,17 @@ function LandingPage() {
 
         {/* Botones */}
         <div className="md:col-span-2 flex flex-col md:flex-row justify-center items-center gap-6 mt-4">
-          <button className="bg-teal-700 text-white px-6 py-3 rounded-xl hover:bg-teal-800 transition">
-            Registrar organización
-          </button>
-          <button className="bg-teal-700 text-white px-6 py-3 rounded-xl hover:bg-teal-800 transition">
-            Iniciar sesión
-          </button>
+          <Link to="/registro/organizacion">
+            <button className="bg-teal-700 text-white px-6 py-3 rounded-xl hover:bg-teal-800 transition">
+              Registrar organización
+            </button>
+          </Link>
+
+          <Link to="/login">
+            <button className="bg-teal-700 text-white px-6 py-3 rounded-xl hover:bg-teal-800 transition">
+              Iniciar sesión
+            </button>
+          </Link>
         </div>
       </main>
     </div>
