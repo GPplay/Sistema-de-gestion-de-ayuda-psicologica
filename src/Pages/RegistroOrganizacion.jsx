@@ -1,6 +1,18 @@
 import React from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function RegistroOrganizacion() {
+
+  const [numeroId, setNumeroId] = useState('');
+
+  const handleNumeroChange = (e) => {
+    const valor = e.target.value;
+    // Elimina todo lo que no sean números
+    const soloNumeros = valor.replace(/\D/g, '');
+    setNumeroId(soloNumeros);
+  };
+
 
     const [tipoId, setTipoId] = useState('CC');
 
@@ -20,18 +32,18 @@ function RegistroOrganizacion() {
         <div className="bg-gray-300 p-6 rounded-2xl shadow-md grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col">
             <label className="font-bold mb-1">Nombre de Rector</label>
-            <input className="rounded-lg px-4 py-2" type="text" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="text" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Apellido</label>
-            <input className="rounded-lg px-4 py-2" type="text" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="text" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Identificación</label>
             <select
-              className="rounded-lg px-4 py-2"
+              className="bg-white rounded-lg px-4 py-2"
               value={tipoId}
               onChange={(e) => setTipoId(e.target.value)}
             >
@@ -40,26 +52,35 @@ function RegistroOrganizacion() {
             </select>
           </div>
 
-          <div></div> {/* Espacio vacío para mantener alineación */}
+          <div className="flex flex-col">
+            <label className="font-bold mb-1">Número de Identificación</label>
+                <input
+                    className="bg-white rounded-lg px-4 py-2"
+                    type="text"
+                    value={numeroId}
+                    onChange={handleNumeroChange}
+                    required
+                />
+            </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Email</label>
-            <input className="rounded-lg px-4 py-2" type="email" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="text" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Contraseña</label>
-            <input className="rounded-lg px-4 py-2" type="password" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="password" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Confirmar Contraseña</label>
-            <input className="rounded-lg px-4 py-2" type="password" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="password" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Teléfono</label>
-            <input className="rounded-lg px-4 py-2" type="tel" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="tel" required />
           </div>
         </div>
 
@@ -67,32 +88,32 @@ function RegistroOrganizacion() {
         <div className="bg-gray-300 p-6 rounded-2xl shadow-md grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col">
             <label className="font-bold mb-1">Nombre de Organización</label>
-            <input className="rounded-lg px-4 py-2" type="text" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="text" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">NIT</label>
-            <input className="rounded-lg px-4 py-2" type="text" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="text" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Razón Social</label>
-            <input className="rounded-lg px-4 py-2" type="text" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="text" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Email</label>
-            <input className="rounded-lg px-4 py-2" type="email" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="email" required />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">URL del Sitio Web (Opcional)</label>
-            <input className="rounded-lg px-4 py-2" type="url" />
+            <input className="bg-white rounded-lg px-4 py-2" type="url" />
           </div>
 
           <div className="flex flex-col">
             <label className="font-bold mb-1">Dirección</label>
-            <input className="rounded-lg px-4 py-2" type="text" required />
+            <input className="bg-white rounded-lg px-4 py-2" type="text" required />
           </div>
         </div>
 
