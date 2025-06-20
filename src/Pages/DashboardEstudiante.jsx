@@ -2,7 +2,7 @@ import React from "react";
 
 function DashboardEstudiante() {
 
-  const encuestas = Array(5).fill("Esto debe ser dinamico");
+  const encuestas = Array(100).fill("Esto debe ser dinamico");
 
   return (
     <div className="bg-[#f9f1dc] min-h-screen p-6">
