@@ -15,7 +15,7 @@ import CrearEncuesta from './Pages/Rector/CrearEncuesta'
 
 // Estudiante
 import DashboardEstudiante from './Pages/Estudiante/DashboardEstudiante'
-import Encuestas from './Pages/Estudiante/Encuestas'
+import Encuesta from './Pages/Estudiante/Encuesta'
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
           {/* Estudiante (privado) */}
           <Route element={<PrivateRoute allowedRoles={['estudiante']} />}>
             <Route path="estudiante/dashboard" element={<DashboardEstudiante />} />
-            <Route path="estudiante/encuestas" element={<Encuestas />} />
+            <Route path="estudiante/encuesta" element={<Encuesta />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
