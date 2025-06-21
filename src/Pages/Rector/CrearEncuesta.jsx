@@ -1,53 +1,76 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 import InputField from '../../Components/InputField'
-import FormButtons from '../../Components/FromButtons'
+import PreguntaCard from '../../Components/PreguntaCard'
 
 const CrearEncuesta = () => {
   const [surveyTitle, setSurveyTitle] = useState('')
   const [questions, setQuestions] = useState([])
-  const [currentQuestion, setCurrentQuestion] = useState('')
-  const [responseMode, setResponseMode] = useState('options')
-  const [options, setOptions] = useState(['', ''])
 
   const navigate = useNavigate()
 
-  const handleAddOption = () => {
-    setOptions([...options, ''])
-  }
-
-  const handleOptionChange = (index, value) => {
-    const newOptions = [...options]
-    newOptions[index] = value
-    setOptions(newOptions)
-  }
-
   const handleAddQuestion = () => {
-    if (!currentQuestion.trim()) return
-
     const newQuestion = {
-      question: currentQuestion,
-      type: responseMode,
-      options: responseMode === 'options' ? options.filter(opt => opt.trim()) : [],
+      id: uuidv4(),
+      question: '',
+      type: 'options',
+      options: ['', '']
     }
-
     setQuestions([...questions, newQuestion])
-    setCurrentQuestion('')
-    setOptions(['', ''])
-    setResponseMode('options')
+  }
+
+  const updateQuestion = (id, updater) => {
+    setQuestions(prev =>
+      prev.map(q => (q.id === id ? updater(q) : q))
+    )
+  }
+
+  const handleChangeQuestionText = (id, value) => {
+    updateQuestion(id, q => ({ ...q, question: value }))
+  }
+
+  const handleChangeOption = (qid, index, value) => {
+    updateQuestion(qid, q => {
+      const updatedOptions = [...q.options]
+      updatedOptions[index] = value
+      return { ...q, options: updatedOptions }
+    })
+  }
+
+  const handleAddOption = (qid) => {
+    updateQuestion(qid, q => ({
+      ...q,
+      options: [...q.options, '']
+    }))
+  }
+
+  const handleRemoveOption = (qid, index) => {
+    updateQuestion(qid, q => ({
+      ...q,
+      options: q.options.filter((_, i) => i !== index)
+    }))
+  }
+
+  const handleToggleQuestionType = (id) => {
+    updateQuestion(id, q => {
+      const newType = q.type === 'options' ? 'text' : 'options'
+      return {
+        ...q,
+        type: newType,
+        options: newType === 'options' ? ['', ''] : []
+      }
+    })
+  }
+
+  const handleDeleteQuestion = (id) => {
+    setQuestions(prev => prev.filter(q => q.id !== id))
   }
 
   const handleFinishSurvey = () => {
-    console.log({
-      title: surveyTitle,
-      questions,
-    })
+    alert(`Encuesta "${surveyTitle}" creada con ${questions.length} preguntas ✅`)
     navigate('/rector/dashboard')
-  }
-
-  const handleModeChange = () => {
-    setResponseMode(responseMode === 'options' ? 'text' : 'options')
   }
 
   return (
@@ -61,77 +84,41 @@ const CrearEncuesta = () => {
           onChange={(e) => setSurveyTitle(e.target.value)}
         />
 
-        <hr className="my-6 border-gray-300" />
+        {/* Listado de preguntas */}
+        <div className="mt-6 space-y-6">
+          {questions.map((q, index) => (
+            <PreguntaCard
+              key={q.id}
+              pregunta={q}
+              index={index}
+              onChangeText={handleChangeQuestionText}
+              onChangeOption={handleChangeOption}
+              onAddOption={handleAddOption}
+              onRemoveOption={handleRemoveOption}
+              onToggleType={handleToggleQuestionType}
+              onDelete={handleDeleteQuestion}
+            />
+          ))}
+        </div>
 
-        <InputField
-          label="Pregunta"
-          value={currentQuestion}
-          onChange={(e) => setCurrentQuestion(e.target.value)}
-        />
-
-        {responseMode === 'options' ? (
-          <div className="mb-4">
-            {options.map((option, index) => (
-              <div key={index} className="flex items-center gap-2 mb-2">
-                <input type="radio" disabled />
-                <input
-                  type="text"
-                  placeholder={`Opción ${index + 1}`}
-                  value={option}
-                  onChange={(e) => handleOptionChange(index, e.target.value)}
-                  className="p-2 border rounded w-full"
-                />
-              </div>
-            ))}
-            <button
-              onClick={handleAddOption}
-              type="button"
-              className="bg-gray-300 px-4 py-1 rounded hover:bg-gray-400"
-            >
-              Agregar opción
-            </button>
-          </div>
-        ) : (
-          <textarea
-            placeholder="Respuesta libre..."
-            disabled
-            className="w-full p-2 rounded border mb-4"
-            rows="4"
-          />
-        )}
-
-        <div className="flex gap-3 mb-6">
+        {/* Botones de control */}
+        <div className="mt-6 flex justify-between items-center">
           <button
-            onClick={handleModeChange}
             type="button"
-            className="bg-gray-600 text-white px-4 py-1 rounded hover:bg-gray-800"
-          >
-            Cambiar a {responseMode === 'options' ? 'texto' : 'opciones'}
-          </button>
-
-          <button
             onClick={handleAddQuestion}
-            type="button"
             className="bg-teal-700 text-white px-6 py-2 rounded-full hover:bg-teal-900 transition"
           >
             Agregar pregunta
           </button>
+
+          <button
+            onClick={handleFinishSurvey}
+            type="button"
+            className="bg-teal-700 text-white px-6 py-2 rounded-full hover:bg-teal-900 transition"
+          >
+            Terminar encuesta
+          </button>
         </div>
-
-        <button
-          onClick={handleFinishSurvey}
-          type="button"
-          className="bg-teal-700 text-white px-6 py-2 rounded-full hover:bg-teal-900 transition w-full"
-        >
-          Terminar encuesta
-        </button>
-      </div>
-
-      <div className="mt-10 max-w-3xl mx-auto">
-        <FormButtons
-          onUpload={() => alert('Funcionalidad de subir Excel')}
-          onRegister={() => navigate('/rector/dashboard/registro/estudiante')}
-        />
       </div>
     </div>
   )

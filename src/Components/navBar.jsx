@@ -21,7 +21,7 @@ function Navbar() {
         <div className="hidden md:flex space-x-6">
           <Link to="/" className="hover:underline">Inicio</Link>
           <Link to="/acerca" className="hover:underline">Acerca</Link>
-          <Link to="/contacto" className="hover:underline">Contacto</Link>
+          <Link to="/Configuracion" className="hover:underline">configuracion</Link>
         </div>
       </div>
     </nav>
@@ -29,3 +29,8 @@ function Navbar() {
 }
 
 export default Navbar;
+
+/*
+  Este nav bar hay que arreglarlo para que funcione con todas las vistas ya sea RECTOR
+  o ESTUDIANTE y que cunado se una el inicio vaya a el dashboard del usuario logueado
+*/ 

@@ -7,19 +7,17 @@ import SearchBar from "../../Components/SearchBar"
 import CreateButton from "../../Components/CreateButton"
 
 const encuestas = [
-  { titulo: "Familia", respuestas: 10 },
-  { titulo: "Casa", respuestas: 10 },
-  { titulo: "Salud Mental", respuestas: 10 },
-  { titulo: "Sentimientos", respuestas: 10 }
+  { id: "familia", titulo: "Familia", respuestas: 10 },
+  { id: "casa", titulo: "Casa", respuestas: 15 },
+  { id: "salud-mental", titulo: "Salud Mental", respuestas: 10 },
+  { id: "sentimientos", titulo: "Sentimientos", respuestas: 10 }
 ]
-
 const DashboardRector = () => {
   const [filtro, setFiltro] = useState("")
 
   const encuestasFiltradas = encuestas.filter((e) =>
     e.titulo.toLowerCase().includes(filtro.toLowerCase())
   )
-
 
   return (
     <div className="flex h-screen overflow-hidden bg-[#f2ebdc]">
@@ -40,9 +38,10 @@ const DashboardRector = () => {
         <div className="max-w-2xl mx-auto">
           <SearchBar onChange={(e) => setFiltro(e.target.value)} />
           <div className="overflow-y-auto max-h-[300px] pr-2">
-            {encuestasFiltradas.map((e, i) => (
+            {encuestasFiltradas.map((e) => (
               <EncuestaCard
-                key={i}
+                key={e.id}
+                id={e.id}
                 titulo={e.titulo}
                 respuestas={e.respuestas}
               />

@@ -8,7 +8,7 @@ const Encuesta = () => {
   const [experienciaAcademica1, setExperienciaAcademica1] = useState('')
   const [experienciaAcademica2, setExperienciaAcademica2] = useState('')
 
-  const opciones = ['Muy mal', 'Mal', 'Regular', 'Bien']
+  const opciones = ['Muy mal', 'Mal', 'Regular', 'Bien']//quitar xq se manera con backend
 
   const handleSubmit = (e) => {
     e.preventDefault()
