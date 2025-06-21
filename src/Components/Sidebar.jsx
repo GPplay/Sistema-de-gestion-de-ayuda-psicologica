@@ -16,7 +16,7 @@ const Sidebar = () => {
         </div>
         <nav className="space-y-2">
           <Link to="/rector/dashboard" className="block hover:bg-teal-800 px-3 py-2 rounded">Home</Link>
-          <Link to="rector/dashboard/registro/estudiante" className="block hover:bg-teal-800 px-3 py-2 rounded">Registrar Estudiante</Link>
+          <Link to="/rector/dashboard/registro/estudiante" className="block hover:bg-teal-800 px-3 py-2 rounded">Registrar Estudiante</Link>
         </nav>
       </div>
       <button onClick={logout} className="bg-red-600 hover:bg-red-700 w-full py-2 rounded text-white mt-8">
