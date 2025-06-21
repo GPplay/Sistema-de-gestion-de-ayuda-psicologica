@@ -1,6 +1,6 @@
 import React from "react";
 
-function DashboardProfesor() {
+function DashboardRector() {
   return (
     <div className="dashboard-profesor">
       <h1>Bienvenido al Dashboard del Profesor</h1>
@@ -10,4 +10,4 @@ function DashboardProfesor() {
   );
 }
 
-export default DashboardProfesor;
+export default DashboardRector;
