@@ -11,6 +11,7 @@ import RegistroOrganizacion from './Pages/RegistroOrganizacion'
 // Rector
 import DashboardRector from './Pages/Rector/DashboardRector'
 import RegistroEstudiante from './Pages/Rector/RegistroEstudiante'
+import CrearEncuesta from './Pages/Rector/CrearEncuesta'
 
 // Estudiante
 import DashboardEstudiante from './Pages/Estudiante/DashboardEstudiante'
@@ -29,7 +30,8 @@ function App() {
           {/* Rector (privado) */}
           <Route element={<PrivateRoute allowedRoles={['rector']} />}>
             <Route path="rector/dashboard" element={<DashboardRector />} />
-            <Route path="rector/registro/estudiante" element={<RegistroEstudiante />} />
+            <Route path="rector/dashboard/registro/estudiante" element={<RegistroEstudiante />} />
+            <Route path="rector/dashboard/crear-encuesta" element={<CrearEncuesta />} />
           </Route>
 
           {/* Estudiante (privado) */}

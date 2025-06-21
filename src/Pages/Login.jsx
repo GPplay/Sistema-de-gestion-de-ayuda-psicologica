@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { login } from '../Utils/auth'
+import { login } from '../utils/auth' 
 
 function Login() {
   const [tipoUsuario, setTipoUsuario] = useState('Estudiante')
