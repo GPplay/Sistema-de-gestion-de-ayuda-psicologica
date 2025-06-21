@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../Utils/auth'
 
 function Login() {
-
-  const [tipoUsuario, setTipoUsuario] = useState('Estudiante');
-  const [correo, setCorreo] = useState('');
-  const [contrasena, setContrasena] = useState('');
+  const [tipoUsuario, setTipoUsuario] = useState('Estudiante')
+  const [correo, setCorreo] = useState('')
+  const [contrasena, setContrasena] = useState('')
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ tipoUsuario, correo, contrasena });
-    // Aquí puedes manejar el login
-  };
+    e.preventDefault()
+
+    const role = tipoUsuario.toLowerCase() // 'rector' o 'estudiante'
+
+    // 🔐 Simulación de login
+    login(role)
+
+    // 🔁 Redirigir según el tipo de usuario
+    if (role === 'rector') {
+      navigate('/rector/dashboard')
+    } else {
+      navigate('/estudiante/dashboard')
+    }
+  }
 
   return (
     <div className="bg-[#f9f1dc] min-h-screen flex flex-col items-center justify-center px-4">
-
       <form
+        onSubmit={handleSubmit}
         className="bg-white rounded-t-3xl rounded-b-xl shadow-xl p-6 w-full max-w-sm"
       >
         <h2 className="text-center text-lg font-bold mb-4">Iniciar sesión</h2>
@@ -49,16 +61,16 @@ function Login() {
           onChange={(e) => setContrasena(e.target.value)}
           required
         />
-      </form>
 
-      <button
-        onClick={handleSubmit}
-        className="mt-6 bg-teal-700 text-white text-lg font-semibold px-8 py-3 rounded-2xl hover:bg-teal-900 transition"
-      >
-        Iniciar sesión
-      </button>
+        <button
+          type="submit"
+          className="w-full mt-2 bg-teal-700 text-white text-lg font-semibold px-8 py-3 rounded-2xl hover:bg-teal-900 transition"
+        >
+          Iniciar sesión
+        </button>
+      </form>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
