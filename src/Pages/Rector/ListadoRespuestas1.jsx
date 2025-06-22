@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import SearchBar from '../../Components/SearchBar'
 import CreateButton from '../../Components/CreateButton'
-import EstudianteCard from '../../Components/EstudianteCard'
+import SmartCard from '../../Components/SmartCard'
 
 const ListadoRespuestas1 = () => {
   const [busqueda, setBusqueda] = useState('')
@@ -38,12 +38,7 @@ const ListadoRespuestas1 = () => {
 
       <div className="space-y-4 max-w-2xl mx-auto">
         {estudiantesFiltrados.map((est) => (
-          <EstudianteCard
-            key={est.id}
-            id={est.id}
-            nombre={est.nombre}
-            curso={est.curso}
-          />
+          <SmartCard key={est.id} type="estudiante" data={est} />
         ))}
         {estudiantesFiltrados.length === 0 && (
           <p className="text-center text-gray-500">No se encontraron coincidencias.</p>

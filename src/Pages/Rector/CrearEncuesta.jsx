@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 
 import InputField from '../../Components/InputField'
-import PreguntaCard from '../../Components/PreguntaCard'
+import SmartCard from '../../Components/SmartCard'
 
 const CrearEncuesta = () => {
   const [surveyTitle, setSurveyTitle] = useState('')
@@ -87,16 +87,19 @@ const CrearEncuesta = () => {
         {/* Listado de preguntas */}
         <div className="mt-6 space-y-6">
           {questions.map((q, index) => (
-            <PreguntaCard
+            <SmartCard
               key={q.id}
-              pregunta={q}
-              index={index}
-              onChangeText={handleChangeQuestionText}
-              onChangeOption={handleChangeOption}
-              onAddOption={handleAddOption}
-              onRemoveOption={handleRemoveOption}
-              onToggleType={handleToggleQuestionType}
-              onDelete={handleDeleteQuestion}
+              type="editable-question"
+              data={{
+                ...q,
+                index,
+                onChangeText: handleChangeQuestionText,
+                onChangeOption: handleChangeOption,
+                onAddOption: handleAddOption,
+                onRemoveOption: handleRemoveOption,
+                onToggleType: handleToggleQuestionType,
+                onDelete: handleDeleteQuestion
+              }}
             />
           ))}
         </div>

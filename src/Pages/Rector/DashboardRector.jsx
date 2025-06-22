@@ -1,8 +1,7 @@
 import { useState } from "react"
 
 import Sidebar from "../../Components/Sidebar"
-import InfoCard from "../../Components/InfoCard"
-import EncuestaCard from "../../Components/EncuestaCard"
+import SmartCard from '../../Components/SmartCard'
 import SearchBar from "../../Components/SearchBar"
 import CreateButton from "../../Components/CreateButton"
 
@@ -12,6 +11,7 @@ const encuestas = [
   { id: "salud-mental", titulo: "Salud Mental", respuestas: 10 },
   { id: "sentimientos", titulo: "Sentimientos", respuestas: 10 }
 ]
+
 const DashboardRector = () => {
   const [filtro, setFiltro] = useState("")
 
@@ -29,21 +29,20 @@ const DashboardRector = () => {
 
         {/* Cards de resumen */}
         <div className="flex justify-center gap-6 mb-8 flex-wrap">
-          <InfoCard label="Total de alumnos" value="120" />
-          <InfoCard label="Encuestas realizadas" value="30" />
-          <InfoCard label="Respuestas de Alumnos" value="130" />
+          <SmartCard type="info" data={{ label: "Total de alumnos", value: 120 }} />
+          <SmartCard type="info" data={{ label: "Encuestas realizadas", value: 30 }} />
+          <SmartCard type="info" data={{ label: "Respuestas de Alumnos", value: 130 }} />
         </div>
 
         {/* Buscador + Lista */}
         <div className="max-w-2xl mx-auto">
           <SearchBar onChange={(e) => setFiltro(e.target.value)} />
-          <div className="overflow-y-auto max-h-[300px] pr-2">
+          <div className="overflow-y-auto max-h-[300px] pr-2 space-y-3">
             {encuestasFiltradas.map((e) => (
-              <EncuestaCard
+              <SmartCard
                 key={e.id}
-                id={e.id}
-                titulo={e.titulo}
-                respuestas={e.respuestas}
+                type="encuesta"
+                data={e}
               />
             ))}
           </div>
