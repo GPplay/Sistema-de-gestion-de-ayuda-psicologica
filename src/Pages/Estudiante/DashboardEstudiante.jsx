@@ -1,4 +1,4 @@
-import EncuestaPendienteCard from '../../Components/EncuestaPendienteCard'
+import SmartCard from '../../Components/SmartCard'
 
 const DashboardEstudiante = () => {
   const encuestas = Array(100).fill("Esto debe ser dinámico")
@@ -8,7 +8,8 @@ const DashboardEstudiante = () => {
       <h2 className="text-3xl font-bold text-teal-800 mb-6">Encuestas Pendientes</h2>
       <div className="space-y-4">
         {encuestas.map((titulo, index) => (
-          <EncuestaPendienteCard key={index} titulo={titulo} />
+          <SmartCard key={index} type="pendiente" data={{ titulo }} />
+
         ))}
       </div>
     </div>
