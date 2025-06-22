@@ -18,4 +18,4 @@ const DashboardEstudiante = () => {
 
 export default DashboardEstudiante
 
-// Hola diego x2sdfasdfsdfdsgdsf
+// Hola Carlos, aquí tienes el código de la página DashboardEstudiante.jsx. He utilizado el componente SmartCard para mostrar las encuestas pendientes. Puedes ajustar el contenido dinámico según sea necesario. Si necesitas más cambios o funcionalidades, házmelo saber.
